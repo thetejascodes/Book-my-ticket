@@ -3,17 +3,32 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.mjs"
+    "start": "node index.mjs",
+    "dev": "nodemon index.mjs",
+    "studio": "drizzle-kit studio",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "drizzle-orm": "^1.0.0-rc.4",
     "express": "^5.2.1",
+    "joi": "^18.2.3",
+    "jsonwebtoken": "^9.0.3",
     "nodemon": "^3.1.14",
-    "pg": "^8.20.0"
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.20.0",
+    "drizzle-kit": "^1.0.0-rc.4",
+    "tsx": "^4.23.0"
   }
 }
