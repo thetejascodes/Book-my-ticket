@@ -39,10 +39,8 @@ export const login = async({email,password})=>{
     const payload = {
         name:User[0].name,
         email:User[0].email,
-        role:User[0].role,
-        accessToken,
-        refreshToken
+        role:User[0].role
     }
-    return payload;
+    return {user:payload,accessToken,refreshToken};
 }
 
