@@ -7,7 +7,6 @@ export const users = pgTable("users", {
   name: varchar("name", { length: 100 }).notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
-  salt:text('salt'),
   role: roleEnum("role").notNull().default("user"),
   isVerified: boolean("is_verified").notNull().default(false),
   verificationToken: varchar("verification_token", { length: 255 }),

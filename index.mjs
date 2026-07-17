@@ -1,3 +1,5 @@
+import 'dotenv/config'
+import app from './app.js';
 import express from "express";
 import pg from "pg";
 import { dirname } from "path";
@@ -12,18 +14,7 @@ const port = process.env.PORT || 8080;
 // Pool is nothing but group of connections
 // If you pick one connection out of the pool and release it
 // the pooler will keep that connection open for sometime to other clients to reuse
-const pool = new pg.Pool({
-  host: "localhost",
-  port: 5432,
-  user: "postgres",
-  password: "postgres",
-  database: "bookMyTicket",
-  max: 20,
-  connectionTimeoutMillis: 0,
-  idleTimeoutMillis: 0,
-});
 
-const app = new express();
 app.use(cors());
 
 app.get("/", (req, res) => {
