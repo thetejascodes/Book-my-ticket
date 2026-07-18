@@ -4,7 +4,8 @@ import {eq} from 'drizzle-orm'
 import ApiError from '../../common/utils/ApiError.js'
 import bcrypt from 'bcryptjs'
 import {generateAccessToken, generateRefreshToken} from '../../common/utils/jwt.utils.js'
-export const registerUser = async ({name,email,password,role})=>{
+
+export const registerUser = async({name,email,password,role})=>{
     const existingUser = await db.select().from(users).where(eq(users.email,email))
     if(existingUser.length>0){
         throw ApiError.badRequest('User with this email already exists')
@@ -42,5 +43,20 @@ export const login = async({email,password})=>{
         role:User[0].role
     }
     return {user:payload,accessToken,refreshToken};
+}
+export const me = async(userId)=>{
+    const user = await db.select().from(users).where(eq(users.id,userId))
+    if(!user > 0){
+        throw ApiError.notFound("User not found")
+    }
+    const payload = {
+        name:user[0].name,
+        email:user[0].email,
+        role:user[0].role,
+        isVerified:user[0].isVerified,
+        createdAt:user[0].createdAt,
+        updatedAt:user[0].updatedAt
+    }
+    return {user:payload};
 }
 

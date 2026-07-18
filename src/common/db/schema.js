@@ -16,3 +16,11 @@ export const users = pgTable("users", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
+
+export const seats = pgTable("seats",{
+  id:uuid('id').primaryKey(serial),
+  isBook:boolean("is_booked").notNull().default(false),
+  userId:uuid("user_id").references(()=>users.id),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+})

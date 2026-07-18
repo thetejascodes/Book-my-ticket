@@ -16,3 +16,7 @@ export const login = async(req,res)=>{
     ApiResponse.ok(res,"User logged in successfully",{user,accessToken})
 }
 
+export const me = async(req,res)=>{
+    const user = await authService.me(req.user.id)
+    ApiResponse.ok(res,"User Profile",user)
+}
