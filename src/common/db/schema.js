@@ -1,4 +1,4 @@
-import { pgTable, serial, varchar, boolean, timestamp, pgEnum,uuid,text } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, boolean, timestamp, pgEnum,uuid,text,integer } from "drizzle-orm/pg-core";
 
 export const roleEnum = pgEnum("role", ["user", "admin"]);
 
@@ -18,9 +18,11 @@ export const users = pgTable("users", {
 });
 
 export const seats = pgTable("seats",{
-  id:uuid('id').primaryKey(serial),
+  id:uuid('id').primaryKey().defaultRandom(),
   isBook:boolean("is_booked").notNull().default(false),
   userId:uuid("user_id").references(()=>users.id),
+  seatNumber: integer("seat_number").notNull(),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 })
+
